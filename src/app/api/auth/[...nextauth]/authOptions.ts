@@ -4,6 +4,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import AppleProvider from "next-auth/providers/apple";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
+import Providers from "next-auth";
 
 export const getNextAuthOptions = () => {
   let rememberMe = () => {
@@ -12,6 +13,8 @@ export const getNextAuthOptions = () => {
       return cookieStore.get("remember")?.value === "true" ? true : false;
     } catch (error: any) {}
   };
+
+  const TestProvider: any = Providers;
 
   const authOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
@@ -44,13 +47,20 @@ export const getNextAuthOptions = () => {
         clientId: <string>process.env.GOOGLE_CLIENT_ID,
         clientSecret: <string>process.env.GOOGLE_CLIENT_SECRET,
       }),
-      AppleProvider({
-        clientId: <string>process.env.APPLE_CLIENT_ID,
-        clientSecret: <any>{
-          teamId: process.env.APPLE_TEAM_ID,
-          privateKey: process.env.APPLE_PRIVATE_KEY,
-          keyId: process.env.APPLE_KEY_ID,
-        },
+      // AppleProvider({
+      //   clientId: <string>process.env.APPLE_CLIENT_ID,
+      //   clientSecret: <any>{
+      //     teamId: process.env.APPLE_TEAM_ID,
+      //     privateKey: process.env.APPLE_PRIVATE_KEY,
+      //     keyId: process.env.APPLE_KEY_ID,
+      //   },
+      // }),
+
+      TestProvider.Apple({
+        clientId: process.env.APPLE_CLIENT_ID,
+        clientSecret: process.env.APPLE_PRIVATE_KEY,
+        callbackUrl:
+          "https://social-login-test-app.vercel.app/api/auth/callback/apple",
       }),
       CredentialsProvider({
         name: "Sign in",
@@ -70,12 +80,12 @@ export const getNextAuthOptions = () => {
     ],
     cookies: {
       pkceCodeVerifier: {
-        name: 'next-auth.pkce.code_verifier',
+        name: "next-auth.pkce.code_verifier",
         options: {
           httpOnly: true,
-          sameSite: 'none',
-          path: '/',
-          secure: process.env.NODE_ENV === 'production',
+          sameSite: "none",
+          path: "/",
+          secure: process.env.NODE_ENV === "production",
         },
       },
     },
