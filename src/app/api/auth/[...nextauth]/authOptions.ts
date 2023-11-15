@@ -47,10 +47,9 @@ export const getNextAuthOptions = () => {
       AppleProvider({
         clientId: <string>process.env.APPLE_CLIENT_ID,
         clientSecret: <any>{
-          // teamId: process.env.APPLE_TEAM_ID,
-          // privateKey: process.env.APPLE_PRIVATE_KEY,
-          // keyId: process.env.APPLE_KEY_ID,
-          clientSecret: process.env.APPLE_PRIVATE_KEY,
+          teamId: process.env.APPLE_TEAM_ID,
+          privateKey: process.env.APPLE_PRIVATE_KEY,
+          keyId: process.env.APPLE_KEY_ID,
         },
       }),
       CredentialsProvider({
