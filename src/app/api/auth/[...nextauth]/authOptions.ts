@@ -41,18 +41,15 @@ export const getNextAuthOptions = () => {
     //site: process.env.NEXTAUTH_URL,
     providers: [
       GoogleProvider({
-        clientId: <string>(
-          "901205670049-lm68bhaqovc75s4s2fc5s18e846dqe8n.apps.googleusercontent.com"
-        ),
-        clientSecret: <string>"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",
+        clientId: <string>process.env.GOOGLE_CLIENT_ID,
+        clientSecret: <string>process.env.GOOGLE_CLIENT_SECRET,
       }),
       AppleProvider({
-        clientId: <string>"app.vercel.social-login-test-app",
+        clientId: <string>process.env.APPLE_CLIENT_ID,
         clientSecret: <any>{
-          teamId: "YURBA43A7C",
-          privateKey:
-            "eyJhbGciOiJFUzI1NiIsImtpZCI6IjU4Nzk3SEFGMjcifQ.eyJleHAiOjE3MDAwMzQxNDMsImlhdCI6MTcwMDAzMDUxMywiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJhcHAudmVyY2VsLnNvY2lhbC1sb2dpbi10ZXN0LWFwcCJ9.PZ83PL7yWCkyKvMPNgxOPvBKHFg638pjZPvNfyqaFtGE6C4mrzYTYyct_6zI4hpt8i4YjCvzsEKSQJpdWOXa2Q",
-          keyId: "58797HAF27",
+          teamId: process.env.APPLE_TEAM_ID,
+          privateKey: process.env.APPLE_PRIVATE_KEY,
+          keyId: process.env.APPLE_KEY_ID,
         },
       }),
       CredentialsProvider({
