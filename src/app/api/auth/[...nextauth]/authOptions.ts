@@ -17,7 +17,7 @@ export const getNextAuthOptions = () => {
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
       async signIn({ user, account, profile }: any) {
-        console.log("Apple", user, account, profile);
+        console.log(user);
         return true;
       },
       async jwt({ token, user, account, profile }) {
@@ -46,7 +46,11 @@ export const getNextAuthOptions = () => {
       }),
       AppleProvider({
         clientId: <string>process.env.APPLE_CLIENT_ID,
-        clientSecret: <any>process.env.APPLE_PRIVATE_KEY,
+        clientSecret: <any>{
+          teamId: process.env.APPLE_TEAM_ID,
+          privateKey: process.env.APPLE_PRIVATE_KEY,
+          keyId: process.env.APPLE_KEY_ID,
+        },
       }),
       CredentialsProvider({
         name: "Sign in",
