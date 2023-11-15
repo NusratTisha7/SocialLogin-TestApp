@@ -45,7 +45,7 @@ export const getNextAuthOptions = () => {
         clientSecret: <string>process.env.GOOGLE_CLIENT_SECRET,
       }),
       AppleProvider({
-        clientId: <string>process.env.FACEBOOK_CLIENT_ID,
+        clientId: <string>process.env.APPLE_CLIENT_ID,
         clientSecret: <any>{
           teamId: process.env.APPLE_TEAM_ID,
           privateKey: process.env.APPLE_PRIVATE_KEY,
