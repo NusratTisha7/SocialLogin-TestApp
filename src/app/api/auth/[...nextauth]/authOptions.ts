@@ -17,7 +17,7 @@ export const getNextAuthOptions = () => {
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
       async signIn({ user, account, profile }: any) {
-        console.log(user, account, profile);
+        console.log("Apple", user, account, profile);
         return true;
       },
       async jwt({ token, user, account, profile }) {
