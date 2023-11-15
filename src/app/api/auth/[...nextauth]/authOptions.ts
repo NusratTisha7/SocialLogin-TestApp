@@ -68,6 +68,7 @@ export const getNextAuthOptions = () => {
         },
       }),
     ],
+
     session: {
       maxAge: rememberMe() ? (30 * 24 * 60 * 60) / 4 : (24 * 60 * 60) / 4,
     },
