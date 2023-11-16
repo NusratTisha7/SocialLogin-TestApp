@@ -20,6 +20,9 @@ export const getNextAuthOptions = () => {
         console.log(user);
         return true;
       },
+      async redirect({ url, baseUrl }) {
+        return baseUrl
+      },
       async jwt({ token, user, account, profile }) {
         if (typeof user !== typeof undefined) {
           token.user = user;
