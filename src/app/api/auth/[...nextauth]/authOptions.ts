@@ -21,10 +21,6 @@ export const getNextAuthOptions = () => {
         return true;
       },
       async redirect({ url, baseUrl }) {
-        // Allows relative callback URLs
-        if (url.startsWith("/")) return `${baseUrl}${url}`
-        // Allows callback URLs on the same origin
-        else if (new URL(url).origin === baseUrl) return url
         return baseUrl
       },
       async jwt({ token, user, account, profile }) {
@@ -53,9 +49,13 @@ export const getNextAuthOptions = () => {
       }),
             AppleProvider({
               clientId: <string>process.env.APPLE_CLIENT_ID,
-                clientSecret: <string>process.env.APPLE_PRIVATE_KEY,
+                clientSecret: <any>{
+                  teamId: process.env.APPLE_TEAM_ID,
+                privateKey: process.env.APPLE_PRIVATE_KEY,
+                keyId: process.env.APPLE_KEY_ID,
+        },
       }),
-                  CredentialsProvider({
+                CredentialsProvider({
                   name: "Sign in",
                 credentials: {
                   username: {
