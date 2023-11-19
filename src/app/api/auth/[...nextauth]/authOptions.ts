@@ -51,7 +51,7 @@ export const getNextAuthOptions = () => {
               clientId: "app.vercel.social-login-test-app",
                 clientSecret: <any>{
                   teamId: "YURBA43A7C",
-                privateKey: "eyJhbGciOiJFUzI1NiIsImtpZCI6IjJZVjc2VVZRVloifQ.eyJleHAiOjE3MDA0MDI0MDgsImlhdCI6MTcwMDM5ODc3OCwiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJhcHAudmVyY2VsLnNvY2lhbC1sb2dpbi10ZXN0LWFwcCJ9.80F_FnqI7oSVV2v5V2_SETaxOKp6iVZvESI5QozAdswhqZpumxZQIF3kGCFQThuB6L4qOhkIdOGhNNWOPhCqxA",
+                privateKey: "eyJhbGciOiJFUzI1NiIsImtpZCI6IjJZVjc2VVZRVloifQ.eyJleHAiOjE3MDMwMDYyNzEsImlhdCI6MTcwMDQxNDI0MSwiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJhcHAudmVyY2VsLnNvY2lhbC1sb2dpbi10ZXN0LWFwcCJ9.A8HGpUkJL10zkVITIfwnE5cdx3AIRGIi3n87VGm7bdcuUuIeBMinQaURiopb_hpa5ADdNSFAITvphrlmJR34ag",
                 keyId: "2YV76UVQVZ",
         },
       }),
