@@ -1,16 +1,16 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
 // @ts-ignore
 import AppleSignin from "react-apple-signin-auth";
 
 const Signin = () => {
-  const [info, setInfo] = useState();
-  const handleSignIn = async (user:any) => {
-    console.log('Apple user:', user);
+  const handleSignIn = async (user: any) => {
+    const clientSecret = "your-client-secret";
+    const idToken = user?.authorization?.id_token;
+    console.log("Apple user:", idToken);
     // Handle user information as needed
   };
-  console.log(info,"%%")
+
   return (
     <div className="mt-3 grid grid-cols-2 gap-2">
       <div
@@ -55,7 +55,14 @@ const Signin = () => {
         onSuccess={handleSignIn}
         onError={(error: any) => console.error(error)}
         iconProp={{ style: { marginTop: "10px" } }}
-        render={(props: any) => <button className=" cursor-pointer bg-pink-500 px-5 py-1.5 rounded-lg" {...props}>Faltu Login</button>}
+        render={(props: any) => (
+          <button
+            className=" cursor-pointer bg-pink-500 px-5 py-1.5 rounded-lg"
+            {...props}
+          >
+            Faltu Login
+          </button>
+        )}
       />
     </div>
   );
