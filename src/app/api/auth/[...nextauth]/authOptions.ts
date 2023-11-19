@@ -53,14 +53,9 @@ export const getNextAuthOptions = () => {
       }),
             AppleProvider({
               clientId: <string>process.env.APPLE_CLIENT_ID,
-                clientSecret: <any>{
-                  appleId:process.env.APPLE_CLIENT_ID,
-                  teamId: process.env.APPLE_TEAM_ID,
-                privateKey: process.env.APPLE_PRIVATE_KEY,
-                keyId: process.env.APPLE_KEY_ID,
-        },
+                clientSecret: <string>process.env.APPLE_PRIVATE_KEY,
       }),
-                CredentialsProvider({
+                  CredentialsProvider({
                   name: "Sign in",
                 credentials: {
                   username: {
