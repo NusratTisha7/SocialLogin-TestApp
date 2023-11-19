@@ -3,30 +3,37 @@ import { signIn } from "next-auth/react";
 // @ts-ignore
 import AppleSignin from "react-apple-signin-auth";
 
-const Signin = () => {
+const SignIn = () => {
+  const jwt = require("jsonwebtoken");
   const handleSignIn = async (user: any) => {
-    const jwt = require("jsonwebtoken");
-
-    const clientSecret ={
+    const clientSecret = {
       teamId: "YURBA43A7C",
-      privateKey: "eyJhbGciOiJFUzI1NiIsImtpZCI6IkoyNjlOVk1CNTMifQ.eyJleHAiOjE3MDMwMTM0NjIsImlhdCI6MTcwMDQyMTQzMiwiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJhcHAudmVyY2VsLmZpcnN0dHJpcC50ZXN0In0.GQz02s5iST6vcC8fl0z0XUF6hbs0gjIVbRA8yrCvFGZHC0ZmVSsPBOWq4MWgnhWhIotF8tzW5Bxlw_YY6lCJ0Q",
+      privateKey:
+        "eyJhbGciOiJFUzI1NiIsImtpZCI6IkoyNjlOVk1CNTMifQ.eyJleHAiOjE3MDMwMTM0NjIsImlhdCI6MTcwMDQyMTQzMiwiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJhcHAudmVyY2VsLmZpcnN0dHJpcC50ZXN0In0.GQz02s5iST6vcC8fl0z0XUF6hbs0gjIVbRA8yrCvFGZHC0ZmVSsPBOWq4MWgnhWhIotF8tzW5Bxlw_YY6lCJ0Q",
       keyId: "J269NVMB53",
-};
+    };
     const idToken = user?.authorization?.id_token;
     console.log("Apple user:", idToken);
     const decodedToken = jwt.decode(idToken, { complete: true });
     if (decodedToken) {
-      const { sub: userId, email, email_verified: emailVerified, aud, exp, iat, ...otherClaims } = decodedToken.payload;
-    
-      console.log('User ID:', userId);
-      console.log('Email:', email);
-      console.log('Email Verified:', emailVerified);
-      console.log('Other Claims:', otherClaims);
-    } else {
-      console.error('Failed to decode id_token');
-    
-  };
+      const {
+        sub: userId,
+        email,
+        email_verified: emailVerified,
+        aud,
+        exp,
+        iat,
+        ...otherClaims
+      } = decodedToken.payload;
 
+      console.log("User ID:", userId);
+      console.log("Email:", email);
+      console.log("Email Verified:", emailVerified);
+      console.log("Other Claims:", otherClaims);
+    } else {
+      console.error("Failed to decode id_token");
+    }
+  };
   return (
     <div className="mt-3 grid grid-cols-2 gap-2">
       <div
@@ -53,7 +60,7 @@ const Signin = () => {
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Apple</p>
       </div>
-      <p className="text-white">Counter: 8 </p>
+      <p className="text-white">Counter: 9 </p>
 
       <AppleSignin
         authOptions={{
@@ -84,4 +91,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default SignIn;
