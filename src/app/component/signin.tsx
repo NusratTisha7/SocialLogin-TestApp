@@ -12,7 +12,7 @@ const Signin = () => {
       </div>
       <div
         className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6]"
-        onClick={() => signIn("apple", { callbackUrl: 'https://social-login-test-app.vercel.app' })}
+        onClick={() => signIn("apple", { callbackUrl: 'https://social-login-test-app.vercel.app/api/auth/callback/apple' })}
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Apple</p>
       </div>
