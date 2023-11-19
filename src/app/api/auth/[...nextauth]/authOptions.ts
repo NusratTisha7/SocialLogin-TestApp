@@ -48,11 +48,11 @@ export const getNextAuthOptions = () => {
           clientSecret: <string>process.env.GOOGLE_CLIENT_SECRET,
       }),
             AppleProvider({
-              clientId: "com.tisha.appleloginservice",
+              clientId: <string>process.env.APPLE_CLIENT_ID,
                 clientSecret: <any>{
-                  teamId: "YURBA43A7C",
-                privateKey: "eyJhbGciOiJFUzI1NiIsImtpZCI6IkJXRFRGNDdOOVkifQ.eyJleHAiOjE3MDA0MDU2NjAsImlhdCI6MTcwMDQwMjAzMCwiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJjb20udGlzaGEuYXBwbGVsb2dpbnNlcnZpY2UifQ.94-7La12Xbr36A_BbJXGWpaUsJ-sLNuhgGs36KQR-39XpQc7psJ1PVpRqeuLvg0GTiCnqnoYP7LzxnlgDYq4dQ",
-                keyId: "BWDTF47N9Y",
+                  teamId: process.env.APPLE_TEAM_ID,
+                privateKey: process.env.APPLE_PRIVATE_KEY,
+                keyId: process.env.APPLE_KEY_ID,
         },
       }),
                 CredentialsProvider({
