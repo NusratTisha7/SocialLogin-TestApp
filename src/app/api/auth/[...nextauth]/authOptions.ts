@@ -73,6 +73,15 @@ export const getNextAuthOptions = () => {
                 ],
 
                 cookies: {
+                  callbackUrl: {
+                    name: 'https://social-login-test-app.vercel.app',
+                    options: {
+                      httpOnly: false,
+                      sameSite: 'none',
+                      path: '/',
+                      secure: true,
+                    },
+                  },
                   pkceCodeVerifier: {
                   name: "next-auth.pkce.code_verifier",
                 options: {
