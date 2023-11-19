@@ -5,10 +5,26 @@ import AppleSignin from "react-apple-signin-auth";
 
 const Signin = () => {
   const handleSignIn = async (user: any) => {
-    const clientSecret = "your-client-secret";
+    const jwt = require("jsonwebtoken");
+
+    const clientSecret ={
+      teamId: "YURBA43A7C",
+      privateKey: "eyJhbGciOiJFUzI1NiIsImtpZCI6IkoyNjlOVk1CNTMifQ.eyJleHAiOjE3MDMwMTM0NjIsImlhdCI6MTcwMDQyMTQzMiwiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJhcHAudmVyY2VsLmZpcnN0dHJpcC50ZXN0In0.GQz02s5iST6vcC8fl0z0XUF6hbs0gjIVbRA8yrCvFGZHC0ZmVSsPBOWq4MWgnhWhIotF8tzW5Bxlw_YY6lCJ0Q",
+      keyId: "J269NVMB53",
+};
     const idToken = user?.authorization?.id_token;
     console.log("Apple user:", idToken);
-    // Handle user information as needed
+    const decodedToken = jwt.decode(idToken, { complete: true });
+    if (decodedToken) {
+      const { sub: userId, email, email_verified: emailVerified, aud, exp, iat, ...otherClaims } = decodedToken.payload;
+    
+      console.log('User ID:', userId);
+      console.log('Email:', email);
+      console.log('Email Verified:', emailVerified);
+      console.log('Other Claims:', otherClaims);
+    } else {
+      console.error('Failed to decode id_token');
+    
   };
 
   return (
