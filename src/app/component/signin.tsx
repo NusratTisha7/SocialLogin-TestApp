@@ -1,18 +1,32 @@
 "use client";
 import { signIn } from "next-auth/react";
 // @ts-ignore
+import jwt from "jsonwebtoken";
+// @ts-ignore
 import AppleSignin from "react-apple-signin-auth";
+import { useState } from "react";
+
+interface UserInfo {
+  userId: string;
+  email: string;
+  name: string;
+  emailVerified: string;
+  otherClaims: string;
+}
 
 const SignIn = () => {
-  const jwt = require("jsonwebtoken");
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  
+  const appleClientSecret = {
+    teamId: "YURBA43A7C",
+    privateKey:
+      "eyJhbGciOiJFUzI1NiIsImtpZCI6IkoyNjlOVk1CNTMifQ.eyJleHAiOjE3MDMwMTM0NjIsImlhdCI6MTcwMDQyMTQzMiwiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJhcHAudmVyY2VsLmZpcnN0dHJpcC50ZXN0In0.GQz02s5iST6vcC8fl0z0XUF6hbs0gjIVbRA8yrCvFGZHC0ZmVSsPBOWq4MWgnhWhIotF8tzW5Bxlw_YY6lCJ0Q",
+    keyId: "J269NVMB53",
+  };
+
   const handleSignIn = async (user: any) => {
-    const clientSecret = {
-      teamId: "YURBA43A7C",
-      privateKey:
-        "eyJhbGciOiJFUzI1NiIsImtpZCI6IkoyNjlOVk1CNTMifQ.eyJleHAiOjE3MDMwMTM0NjIsImlhdCI6MTcwMDQyMTQzMiwiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJhcHAudmVyY2VsLmZpcnN0dHJpcC50ZXN0In0.GQz02s5iST6vcC8fl0z0XUF6hbs0gjIVbRA8yrCvFGZHC0ZmVSsPBOWq4MWgnhWhIotF8tzW5Bxlw_YY6lCJ0Q",
-      keyId: "J269NVMB53",
-    };
     const idToken = user?.authorization?.id_token;
+
     console.log("Apple user:", idToken);
     const decodedToken = jwt.decode(idToken, { complete: true });
     if (decodedToken) {
@@ -20,14 +34,13 @@ const SignIn = () => {
         sub: userId,
         email,
         email_verified: emailVerified,
-        aud,
-        exp,
-        iat,
+        name,
         ...otherClaims
       } = decodedToken.payload;
 
+      setUserInfo({ userId, email, name, emailVerified, otherClaims });
       console.log("User ID:", userId);
-      console.log('Full Name:', name);
+      console.log("Full Name:", name);
       console.log("Email:", email);
       console.log("Email Verified:", emailVerified);
       console.log("Other Claims:", otherClaims);
@@ -81,13 +94,27 @@ const SignIn = () => {
         iconProp={{ style: { marginTop: "10px" } }}
         render={(props: any) => (
           <button
-            className=" cursor-pointer bg-pink-500 px-5 py-1.5 rounded-lg"
+            className=" cursor-pointer text-sm text-black bg-white px-5 py-2 rounded-lg"
+            onClick={() =>
+              signIn("apple", {
+                callbackUrl:
+                  "https://firsttrip.vercel.app/api/auth/callback/apple",
+                clientSecret: appleClientSecret,
+              })
+            }
             {...props}
           >
-            Faltu Login
+            Ami Gumabo 😴
           </button>
         )}
       />
+
+      {userInfo && (
+        <>
+          <p className="text-white">User ID: {userInfo.userId}</p>
+          <p className="text-white">Email: {userInfo.email}</p>
+        </>
+      )}
     </div>
   );
 };
