@@ -27,6 +27,7 @@ const SignIn = () => {
       } = decodedToken.payload;
 
       console.log("User ID:", userId);
+      console.log('Full Name:', name);
       console.log("Email:", email);
       console.log("Email Verified:", emailVerified);
       console.log("Other Claims:", otherClaims);
