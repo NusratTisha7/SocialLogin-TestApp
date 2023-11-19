@@ -1,6 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+// @ts-ignore
 import AppleSignin from "react-apple-signin-auth";
 
 const Signin = () => {
