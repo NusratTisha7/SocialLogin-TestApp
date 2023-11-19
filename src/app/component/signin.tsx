@@ -17,7 +17,7 @@ const Signin = () => {
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Apple</p>
       </div>
-      <p className="text-white">Counter: 4</p>
+      <p className="text-white">Counter: 5</p>
     </div>
   );
 };
