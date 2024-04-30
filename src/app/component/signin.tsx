@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react";
 import jwt from "jsonwebtoken";
 // @ts-ignore
 import AppleSignin from "react-apple-signin-auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface UserInfo {
   userId: string;
@@ -15,8 +15,30 @@ interface UserInfo {
 }
 
 const SignIn = () => {
+  const [os, setOs]: any = useState(null);
+  const [data, setData] = useState("");
+
+  useEffect(() => {
+    if (navigator && navigator.userAgent) {
+      const userAgent = navigator.userAgent;
+      setData(userAgent);
+      const mobileOsRegex = /Android|iOS|iPadOS|Windows Phone/i;
+      const osMatch = mobileOsRegex.exec(userAgent);
+
+      if (osMatch) {
+        setOs(osMatch[0]);
+      } else {
+        setOs("Non-Mobile OS");
+      }
+    } else {
+      console.warn(
+        "navigator.userAgent is not available. Mobile OS detection might not work."
+      );
+    }
+  }, []);
+
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-  
+
   const appleClientSecret = {
     teamId: "YURBA43A7C",
     privateKey:
@@ -108,6 +130,11 @@ const SignIn = () => {
           </button>
         )}
       />
+
+      <div>
+        {os && <p>You are on a {os} device.</p>}
+        Data: {data}
+      </div>
 
       {userInfo && (
         <>
