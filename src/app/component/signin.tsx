@@ -70,6 +70,7 @@ const SignIn = () => {
       console.error("Failed to decode id_token");
     }
   };
+
   return (
     <div className="mt-3 grid grid-cols-2 gap-2">
       <div
@@ -133,6 +134,7 @@ const SignIn = () => {
 
       <div>
         {os && <p>You are on a {os} device.</p>}
+        {typeof os}
         Data: {data}
       </div>
 
