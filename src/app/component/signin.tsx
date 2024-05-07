@@ -22,7 +22,7 @@ const SignIn = () => {
   useEffect(() => {
     if (navigator && navigator.userAgent) {
       const userAgent = navigator.userAgent;
-      const Regex = /Android|iPhone|iOS|Linux|macOs|iPadOS|Windows|Phone/i;
+      const Regex = /Android|iPhone|iOS|macOs|iPadOS|Windows|Phone/i;
       const osMatch = Regex.exec(userAgent);
       setData(userAgent)
       if (osMatch) {
