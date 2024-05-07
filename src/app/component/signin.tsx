@@ -142,6 +142,7 @@ const SignIn = () => {
         <p>Os: {os}</p>
         <p>Device: {device}</p>
         <p>{array}</p>
+        <p>{typeof array}</p>
         Data: {data}
       </div>
 
