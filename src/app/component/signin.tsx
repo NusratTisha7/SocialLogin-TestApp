@@ -29,6 +29,7 @@ const SignIn = () => {
       setArray(osMatch);
       console.log("osMatch", osMatch);
       if (osMatch) {
+        console.log("osMatch", osMatch[0], osMatch[1]);
         setOs(osMatch[0]);
         osMatch[0] === "Android" || osMatch[0] === "iPhone"
           ? setDevice("Mobile")
