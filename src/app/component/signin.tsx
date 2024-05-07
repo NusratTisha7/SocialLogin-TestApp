@@ -139,10 +139,11 @@ const SignIn = () => {
       />
 
       <div>
-        <p>Os: {os}</p>
+        {/* <p>Os: {os}</p>
         <p>Device: {device}</p>
         <p>{array}</p>
-        <p>{typeof array}</p>
+        <p>{typeof array}</p> */}
+        {array==='Android'?'Android':'...'}
         Data: {data}
       </div>
 
