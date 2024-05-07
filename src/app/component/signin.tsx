@@ -16,19 +16,23 @@ interface UserInfo {
 
 const SignIn = () => {
   const [os, setOs]: any = useState(null);
+  const [device, setDevice] = useState("");
   const [data, setData] = useState("");
 
   useEffect(() => {
     if (navigator && navigator.userAgent) {
       const userAgent = navigator.userAgent;
-      setData(userAgent);
-      const mobileOsRegex = /Android|iPhone|iOS|Linux|macOs|iPadOS|Windows|Phone/i;
-      const osMatch = mobileOsRegex.exec(userAgent);
+      const Regex = /Android|iPhone|iOS|Linux|macOs|iPadOS|Windows|Phone/i;
+      const osMatch = Regex.exec(userAgent);
 
       if (osMatch) {
         setOs(osMatch[0]);
+        osMatch[0] === "Android" || osMatch[0] === "iPhone"
+          ? setDevice("Mobile")
+          : setDevice("Desktop");
       } else {
-        setOs("Non-Mobile OS");
+        setOs("Unknown");
+        setDevice("Unknown");
       }
     } else {
       console.warn(
@@ -133,7 +137,8 @@ const SignIn = () => {
       />
 
       <div>
-        {os && <p>You are on a {os} device.</p>}
+        <p>Os: {os}</p>
+        <p>Device: {device}</p>
         Data: {data}
       </div>
 
