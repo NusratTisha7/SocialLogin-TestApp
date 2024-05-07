@@ -137,7 +137,7 @@ const SignIn = () => {
         {os === "Non-Mobile OS" && <p>Windows</p>}
         {os === "Android" && <p>Android</p>}
         {os === "iPhone" && <p>IPhone</p>}
-        {/* Data: {data} */}
+        Data: {data}
       </div>
 
       {userInfo && (
