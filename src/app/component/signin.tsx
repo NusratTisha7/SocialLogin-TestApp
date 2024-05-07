@@ -134,9 +134,6 @@ const SignIn = () => {
 
       <div>
         {os && <p>You are on a {os} device.</p>}
-        {os === "Non-Mobile OS" && <p>Windows</p>}
-        {os === "Android" && <p>Android</p>}
-        {os === "iPhone" && <p>IPhone</p>}
         Data: {data}
       </div>
 
