@@ -24,7 +24,8 @@ const SignIn = () => {
       const userAgent = navigator.userAgent;
       const Regex = /Android|iPhone|iOS|macOs|iPadOS|Windows|Phone/i;
       const osMatch = Regex.exec(userAgent);
-      setData(userAgent)
+      setData(userAgent);
+      console.log("osMatch", osMatch);
       if (osMatch) {
         setOs(osMatch[0]);
         osMatch[0] === "Android" || osMatch[0] === "iPhone"
