@@ -18,7 +18,7 @@ const SignIn = () => {
   const [os, setOs]: any = useState(null);
   const [device, setDevice] = useState("");
   const [data, setData] = useState("");
-  const [array,setArray]:any=useState([])
+  const [array, setArray]: any = useState([]);
 
   useEffect(() => {
     if (navigator && navigator.userAgent) {
@@ -27,6 +27,7 @@ const SignIn = () => {
       const osMatch = Regex.exec(userAgent);
       setData(userAgent);
       setArray(osMatch);
+      console.log("osMatch", osMatch);
       if (osMatch) {
         setOs(osMatch[0]);
         osMatch[0] === "Android" || osMatch[0] === "iPhone"
@@ -139,11 +140,10 @@ const SignIn = () => {
       />
 
       <div>
-        {/* <p>Os: {os}</p>
+        <p>Os: {os}</p>
         <p>Device: {device}</p>
         <p>{array}</p>
-        <p>{typeof array}</p> */}
-        {array==='Android'?'Android':'...'}
+        <p>{typeof array}</p>
         Data: {data}
       </div>
 
