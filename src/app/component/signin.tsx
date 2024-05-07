@@ -22,7 +22,7 @@ const SignIn = () => {
     if (navigator && navigator.userAgent) {
       const userAgent = navigator.userAgent;
       setData(userAgent);
-      const mobileOsRegex = /Android|iPhone|iOS|iPadOS|Windows Phone/i;
+      const mobileOsRegex = /Android|iPhone|iOS|Linux|macOs|iPadOS|Windows|Phone/i;
       const osMatch = mobileOsRegex.exec(userAgent);
 
       if (osMatch) {
