@@ -21,15 +21,17 @@ const SignIn = () => {
   const [array, setArray]: any = useState([]);
 
   useEffect(() => {
+    window.open(
+      `https://apps.apple.com/app/foodi-food-delivery/id1610910233`,
+      "_self"
+    );
     if (navigator && navigator.userAgent) {
       const userAgent = navigator.userAgent;
       const Regex = /Android|iPhone|iOS|macOs|iPadOS|Windows|Phone/i;
       const osMatch = Regex.exec(userAgent);
       setData(userAgent);
       setArray(osMatch);
-      console.log("osMatch", osMatch);
       if (osMatch) {
-        console.log("osMatch", osMatch[0], osMatch[1]);
         setOs(osMatch[0]);
         osMatch[0] === "Android" || osMatch[0] === "iPhone"
           ? setDevice("Mobile")
