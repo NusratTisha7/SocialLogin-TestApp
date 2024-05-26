@@ -21,10 +21,6 @@ const SignIn = () => {
   const [array, setArray]: any = useState([]);
 
   useEffect(() => {
-    window.open(
-      `https://apps.apple.com/app/foodi-food-delivery/id1610910233`,
-      "_self"
-    );
     if (navigator && navigator.userAgent) {
       const userAgent = navigator.userAgent;
       const Regex = /Android|iPhone|iOS|macOs|iPadOS|Windows|Phone/i;
