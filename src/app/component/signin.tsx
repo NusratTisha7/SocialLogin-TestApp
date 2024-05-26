@@ -89,6 +89,14 @@ const SignIn = () => {
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Google</p>
       </div>
+
+      <div
+        className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6]"
+        onClick={() => signIn("facebook")}
+      >
+        <p className="ml-1 text-xs text-[#575757]">Sign in with Facebook</p>
+      </div>
+
       <div
         className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6]"
         onClick={() =>

@@ -2,6 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import AppleProvider from "next-auth/providers/apple";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import { cookies } from "next/headers";
 
 export const getNextAuthOptions = () => {
@@ -45,6 +46,10 @@ export const getNextAuthOptions = () => {
       GoogleProvider({
         clientId: <string>process.env.GOOGLE_CLIENT_ID,
         clientSecret: <string>process.env.GOOGLE_CLIENT_SECRET,
+      }),
+      FacebookProvider({
+        clientId: <string>process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: <string>process.env.FACEBOOK_CLIENT_SECRET,
       }),
       AppleProvider({
         clientId: "app.vercel.firsttrip.test",
