@@ -18,6 +18,8 @@ export const getNextAuthOptions = () => {
     callbacks: {
       async signIn({ user, account, profile }: any) {
         console.log("user", user);
+        console.log("account", account);
+        console.log("profile", profile);
         return true;
       },
       async redirect({ url, baseUrl }) {
