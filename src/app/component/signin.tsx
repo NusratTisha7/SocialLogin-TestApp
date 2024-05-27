@@ -57,6 +57,7 @@ const SignIn = () => {
 
     console.log("Apple user:", idToken);
     const decodedToken = jwt.decode(idToken, { complete: true });
+    console.log("decodedToken", decodedToken);
     if (decodedToken) {
       const {
         sub: userId,
