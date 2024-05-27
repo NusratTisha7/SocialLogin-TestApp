@@ -26,6 +26,13 @@ export const getNextAuthOptions = () => {
         return baseUrl;
       },
       async jwt({ token, user, account, profile }) {
+        console.log(
+          " token, user, account, profile",
+          token,
+          user,
+          account,
+          profile
+        );
         if (typeof user !== typeof undefined) {
           token.user = user;
           let { expiration }: any = user;
@@ -34,6 +41,7 @@ export const getNextAuthOptions = () => {
       },
       async session(props: any) {
         let { session, token, user } = props;
+        console.log("session, token, user", session, token, user);
         if (session !== null) {
           session.user = token.user;
           session.accessToken = token.user.token;
