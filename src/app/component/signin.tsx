@@ -48,7 +48,7 @@ const SignIn = () => {
   const appleClientSecret = {
     teamId: "YURBA43A7C",
     privateKey:
-      "eyJhbGciOiJFUzI1NiIsImtpZCI6IkoyNjlOVk1CNTMifQ.eyJleHAiOjE3MDMwMTM0NjIsImlhdCI6MTcwMDQyMTQzMiwiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJhcHAudmVyY2VsLmZpcnN0dHJpcC50ZXN0In0.GQz02s5iST6vcC8fl0z0XUF6hbs0gjIVbRA8yrCvFGZHC0ZmVSsPBOWq4MWgnhWhIotF8tzW5Bxlw_YY6lCJ0Q",
+      "eyJhbGciOiJFUzI1NiIsImtpZCI6IkhZOTdONjNMTVIifQ.eyJleHAiOjE3MjQ5MTYzODcsImlhdCI6MTcyNDkxMjc1NywiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJjb20uZmlyc3R0cmlwLnByZS1iMmMifQ.usU1NMjGzuuMw6BfhQDNaW8CWgin0rCs8QTp82A8f36-hxnHluSgUXODT6IXjNSPyy1bL48kUDWRSyKK4Hczbg",
     keyId: "J269NVMB53",
   };
 
@@ -113,7 +113,7 @@ const SignIn = () => {
 
       <AppleSignin
         authOptions={{
-          clientId: "app.vercel.firsttrip.test",
+          clientId: "com.firsttrip.pre-b2c",
           scope: "email name",
           redirectURI: "https://firsttrip.vercel.app/api/auth/callback/apple",
           state: "state",
