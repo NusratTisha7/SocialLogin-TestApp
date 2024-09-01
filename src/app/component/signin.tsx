@@ -130,13 +130,7 @@ const SignIn = () => {
         render={(props: any) => (
           <button
             className=" cursor-pointer text-sm text-black bg-white px-5 py-2 rounded-lg"
-            onClick={() =>
-              signIn("apple", {
-                callbackUrl:
-                  "https://firsttrip.vercel.app/api/auth/callback/apple",
-                clientSecret: appleClientSecret,
-              })
-            }
+            
             {...props}
           >
             Ami Gumabo 😴
