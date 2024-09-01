@@ -113,7 +113,7 @@ const SignIn = () => {
           redirectURI: "https://firsttrip.vercel.app/api/auth/callback/apple",
           state: "state",
           nonce: "nonce",
-          usePopup: true,
+          usePopup: false,
         }}
         uiType="dark"
         className="apple-auth-btn"
