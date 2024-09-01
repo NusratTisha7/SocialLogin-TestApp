@@ -47,6 +47,7 @@ const SignIn = () => {
 
  
   const handleSignIn = async (user: any) => {
+    console.log("user",user)
     const idToken = user?.authorization?.id_token;
     const decodedToken = jwt.decode(idToken, { complete: true });
     if (decodedToken) {
