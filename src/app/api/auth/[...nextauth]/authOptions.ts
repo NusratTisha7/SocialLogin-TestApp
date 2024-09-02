@@ -10,7 +10,7 @@ export const getNextAuthOptions = () => {
     try {
       const cookieStore = cookies();
       return cookieStore.get("remember")?.value === "true" ? true : false;
-    } catch (error: any) {}
+    } catch (error: any) { }
   };
 
   const authOptions: NextAuthOptions = {
@@ -66,14 +66,15 @@ export const getNextAuthOptions = () => {
       //   clientSecret: "eyJhbGciOiJFUzI1NiIsImtpZCI6IkhZOTdONjNMTVIifQ.eyJleHAiOjE3MjQ5MTYzODcsImlhdCI6MTcyNDkxMjc1NywiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJjb20uZmlyc3R0cmlwLnByZS1iMmMifQ.usU1NMjGzuuMw6BfhQDNaW8CWgin0rCs8QTp82A8f36-hxnHluSgUXODT6IXjNSPyy1bL48kUDWRSyKK4Hczbg",
 
       // }),
-
-      clientId: "com.firsttrip.pre-b2c",
-      clientSecret: <any>{
-        teamId: "YURBA43A7C",
-        privateKey:
-          "eyJhbGciOiJFUzI1NiIsImtpZCI6IkhZOTdONjNMTVIifQ.eyJleHAiOjE3MjQ5MTYzODcsImlhdCI6MTcyNDkxMjc1NywiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJjb20uZmlyc3R0cmlwLnByZS1iMmMifQ.usU1NMjGzuuMw6BfhQDNaW8CWgin0rCs8QTp82A8f36-hxnHluSgUXODT6IXjNSPyy1bL48kUDWRSyKK4Hczbg",
-        keyId: "HY97N63LMR",
-      },
+      AppleProvider({
+        clientId: "com.firsttrip.pre-b2c",
+        clientSecret: <any>{
+          teamId: "YURBA43A7C",
+          privateKey:
+            "eyJhbGciOiJFUzI1NiIsImtpZCI6IkhZOTdONjNMTVIifQ.eyJleHAiOjE3MjQ5MTYzODcsImlhdCI6MTcyNDkxMjc1NywiaXNzIjoiWVVSQkE0M0E3QyIsImF1ZCI6Imh0dHBzOi8vYXBwbGVpZC5hcHBsZS5jb20iLCJzdWIiOiJjb20uZmlyc3R0cmlwLnByZS1iMmMifQ.usU1NMjGzuuMw6BfhQDNaW8CWgin0rCs8QTp82A8f36-hxnHluSgUXODT6IXjNSPyy1bL48kUDWRSyKK4Hczbg",
+          keyId: "HY97N63LMR",
+        },
+      }),
       CredentialsProvider({
         name: "Sign in",
         credentials: {
