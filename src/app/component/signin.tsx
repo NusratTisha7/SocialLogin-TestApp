@@ -43,7 +43,7 @@ const SignIn = () => {
     const left = window.screen.width / 2 - width / 2;
     const top = window.screen.height / 2 - height / 2;
 
-    // Open a blank popup window
+    // Open a blank popup window first
     const popup = window.open(
       '',
       'GoogleSignIn',
@@ -56,28 +56,31 @@ const SignIn = () => {
     }
 
     try {
-      // Fetch the sign-in URL from NextAuth without redirection
-      const response = await signIn('google', { redirect: false });
+      // Construct the OAuth URL manually
+      const baseUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
+      const clientId = encodeURIComponent('YOUR_GOOGLE_CLIENT_ID');
+      const redirectUri = encodeURIComponent('https://your-app.com/api/auth/callback/google');
+      const scope = encodeURIComponent('openid profile email');
+      const responseType = 'token'; // or 'code' depending on your flow
+      const state = encodeURIComponent('YOUR_OPTIONAL_STATE');
+      const nonce = encodeURIComponent('YOUR_OPTIONAL_NONCE');
 
-      if (response?.url) {
-        // Redirect the popup window to the Google sign-in page
-        popup.location.href = response.url;
+      const authUrl = `${baseUrl}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}&nonce=${nonce}`;
 
-        // Prevent main window from navigating away
-        popup.focus();
+      // Redirect the popup to the Google sign-in page
+      popup.location.href = authUrl;
 
-        // Monitor the popup for closure
-        const popupInterval = setInterval(() => {
-          if (popup.closed) {
-            clearInterval(popupInterval);
-            // Refresh the page or perform an action after popup is closed
-            window.location.reload();
-          }
-        }, 500);
-      } else {
-        console.error('Error fetching Google sign-in URL');
-        popup.close();
-      }
+      // Focus the popup window
+      popup.focus();
+
+      // Monitor the popup for closure
+      const popupInterval = setInterval(() => {
+        if (popup.closed) {
+          clearInterval(popupInterval);
+          // Perform any action after popup is closed
+          window.location.reload();
+        }
+      }, 500);
     } catch (error) {
       console.error('Error during Google sign-in:', error);
       popup.close();
@@ -118,7 +121,7 @@ const SignIn = () => {
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Apple</p>
       </div>
-      <p className="text-white">Counter: 20 </p>
+      <p className="text-white">Counter: 21 </p>
 
       <AppleSignin
         authOptions={{
