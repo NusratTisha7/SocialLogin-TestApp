@@ -37,35 +37,39 @@ const SignIn = () => {
     }
   };
 
-  const handleGoogleSignIn = () => {
+  const handleGoogleSignIn = async () => {
     const width = 500;
     const height = 600;
     const left = window.screen.width / 2 - width / 2;
     const top = window.screen.height / 2 - height / 2;
 
-    // Construct the full Google sign-in URL for NextAuth
-    const googleSignInUrl = `/api/auth/signin/google?callbackUrl=${encodeURIComponent(window.location.href)}`;
+    // Use NextAuth's signIn function with redirect: false to get the URL
+    const response = await signIn('google', { redirect: false });
 
-    // Open the Google sign-in page in a new popup window
-    const popup = window.open(
-      googleSignInUrl,
-      'GoogleSignIn',
-      `width=${width},height=${height},top=${top},left=${left}`
-    );
+    if (response?.url) {
+      // Open the Google sign-in page in a new popup window
+      const popup = window.open(
+        response.url,
+        'GoogleSignIn',
+        `width=${width},height=${height},top=${top},left=${left}`
+      );
 
-    if (!popup) {
-      alert('Popup blocked! Please allow popups for this website.');
-      return;
-    }
-
-    // Listen for when the popup closes
-    const popupInterval = setInterval(() => {
-      if (popup.closed) {
-        clearInterval(popupInterval);
-        // Optionally, refresh the page or do something else after the popup is closed
-        window.location.reload(); // This will reload the page to check if the user is logged in
+      if (!popup) {
+        alert('Popup blocked! Please allow popups for this website.');
+        return;
       }
-    }, 500);
+
+      // Listen for when the popup closes
+      const popupInterval = setInterval(() => {
+        if (popup.closed) {
+          clearInterval(popupInterval);
+          // Optionally, refresh the page or do something else after the popup is closed
+          window.location.reload(); // This will reload the page to check if the user is logged in
+        }
+      }, 500);
+    } else {
+      console.error('Error fetching Google sign-in URL');
+    }
   };
 
 
@@ -103,7 +107,7 @@ const SignIn = () => {
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Apple</p>
       </div>
-      <p className="text-white">Counter: 18 </p>
+      <p className="text-white">Counter: 19 </p>
 
       <AppleSignin
         authOptions={{
