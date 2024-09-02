@@ -63,6 +63,7 @@ const SignIn = () => {
       const redirectUri = encodeURIComponent('https://firsttrip.vercel.app/api/auth/callback/apple');
       const scope = encodeURIComponent('openid profile email');
       const responseType = 'code'; // Use 'code' for authorization code flow
+      const state = encodeURIComponent('YOUR_OPTIONAL_STATE');
 
       const authUrl = `${baseUrl}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}`;
 
