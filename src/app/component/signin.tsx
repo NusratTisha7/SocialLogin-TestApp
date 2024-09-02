@@ -37,11 +37,36 @@ const SignIn = () => {
     }
   };
 
+  const signInWithGooglePopup = () => {
+    const width = 500;
+    const height = 600;
+    const left = window.screen.width / 2 - width / 2;
+    const top = window.screen.height / 2 - height / 2;
+  
+    // Open a new window with the Google sign-in URL
+    const popup = window.open(
+      '/api/auth/signin/google?callbackUrl=/',
+      'Google Login',
+      `width=${width},height=${height},top=${top},left=${left}`
+    );
+  
+    if (popup) {
+      // Check if the popup is closed
+      const popupInterval = setInterval(() => {
+        if (popup.closed) {
+          clearInterval(popupInterval);
+          // Refresh or perform any action after popup is closed
+          window.location.reload(); // This can be replaced with your custom logic
+        }
+      }, 500);
+    }
+  };
+
   return (
     <div className="mt-3 grid grid-cols-2 gap-2">
       <div
         className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6] p-3"
-        onClick={() => signIn("google")}
+        onClick={() => signInWithGooglePopup}
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Google</p>
       </div>
