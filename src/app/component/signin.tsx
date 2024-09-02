@@ -54,6 +54,7 @@ const SignIn = () => {
       alert('Popup blocked! Please allow popups for this website.');
       return;
     }
+  }
 
 
   return (
