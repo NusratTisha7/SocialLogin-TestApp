@@ -66,9 +66,15 @@ const SignIn = () => {
     <div className="mt-3 grid grid-cols-2 gap-2">
       <div
         className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6] p-3"
-        onClick={() => signIn("google",{
-          redirect:false
-        })}
+        onClick={() => {
+          const authWindow = window.open("", "GoogleAuthWindow", "width=800,height=600");
+          signIn("google", { callbackUrl: "false" }).then((response) => {
+            if (response.error) {
+            authWindow.close();
+            } else {
+            authWindow.location = response.url;
+            }
+        }}
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Google</p>
       </div>
@@ -98,7 +104,7 @@ const SignIn = () => {
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Apple</p>
       </div>
-      <p className="text-white">Counter: 14 </p>
+      <p className="text-white">Counter: 15 </p>
 
       <AppleSignin
         authOptions={{
