@@ -60,7 +60,7 @@ const SignIn = () => {
       // Construct the OAuth URL manually
       const baseUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
       const clientId = encodeURIComponent('901205670049-lm68bhaqovc75s4s2fc5s18e846dqe8n.apps.googleusercontent.com');
-      const redirectUri = encodeURIComponent('https://firsttrip.vercel.app/api/auth/callback/apple');
+      const redirectUri = encodeURIComponent('https://firsttrip.vercel.app/api/auth/callback/google');
       const scope = encodeURIComponent('openid profile email');
       const responseType = 'code'; // Use 'code' for authorization code flow
       const state = encodeURIComponent('YOUR_OPTIONAL_STATE');
