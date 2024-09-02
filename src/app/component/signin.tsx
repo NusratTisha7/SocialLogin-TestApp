@@ -37,6 +37,7 @@ const SignIn = () => {
     }
   };
 
+
   const handleGoogleSignIn = async () => {
     const width = 500;
     const height = 600;
@@ -58,14 +59,12 @@ const SignIn = () => {
     try {
       // Construct the OAuth URL manually
       const baseUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
-      const clientId = encodeURIComponent('YOUR_GOOGLE_CLIENT_ID');
-      const redirectUri = encodeURIComponent('https://your-app.com/api/auth/callback/google');
+      const clientId = encodeURIComponent('901205670049-lm68bhaqovc75s4s2fc5s18e846dqe8n.apps.googleusercontent.com');
+      const redirectUri = encodeURIComponent('https://firsttrip.vercel.app/api/auth/callback/apple');
       const scope = encodeURIComponent('openid profile email');
-      const responseType = 'token'; // or 'code' depending on your flow
-      const state = encodeURIComponent('YOUR_OPTIONAL_STATE');
-      const nonce = encodeURIComponent('YOUR_OPTIONAL_NONCE');
+      const responseType = 'code'; // Use 'code' for authorization code flow
 
-      const authUrl = `${baseUrl}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}&nonce=${nonce}`;
+      const authUrl = `${baseUrl}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}`;
 
       // Redirect the popup to the Google sign-in page
       popup.location.href = authUrl;
