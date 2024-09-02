@@ -15,36 +15,8 @@ interface UserInfo {
 }
 
 const SignIn = () => {
-  const [os, setOs]: any = useState(null);
-  const [device, setDevice] = useState("");
-  const [data, setData] = useState("");
-  const [array, setArray]: any = useState([]);
-
-  useEffect(() => {
-    if (navigator && navigator.userAgent) {
-      const userAgent = navigator.userAgent;
-      const Regex = /Android|iPhone|iOS|macOs|iPadOS|Windows|Phone/i;
-      const osMatch = Regex.exec(userAgent);
-      setData(userAgent);
-      setArray(osMatch);
-      if (osMatch) {
-        setOs(osMatch[0]);
-        osMatch[0] === "Android" || osMatch[0] === "iPhone"
-          ? setDevice("Mobile")
-          : setDevice("Desktop");
-      } else {
-        setOs("Unknown");
-        setDevice("Unknown");
-      }
-    } else {
-      console.warn(
-        "navigator.userAgent is not available. Mobile OS detection might not work."
-      );
-    }
-  }, []);
 
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-
  
   const handleSignIn = async (user: any) => {
     console.log("user",user)
@@ -60,11 +32,6 @@ const SignIn = () => {
       } = decodedToken.payload;
 
       setUserInfo({ userId, email, name, emailVerified, otherClaims });
-      console.log("User ID:", userId);
-      console.log("Full Name:", name);
-      console.log("Email:", email);
-      console.log("Email Verified:", emailVerified);
-      console.log("Other Claims:", otherClaims);
     } else {
       console.error("Failed to decode id_token");
     }
