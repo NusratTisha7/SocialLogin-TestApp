@@ -100,14 +100,6 @@ const SignIn = () => {
         )}
       />
 
-      <div>
-        <p>Os: {os}</p>
-        <p>Device: {device}</p>
-        <p>{array}</p>
-        <p>{typeof array}</p>
-        Data: {data}
-      </div>
-
       {userInfo && (
         <>
           <p className="text-white">User ID: {userInfo.userId}</p>
