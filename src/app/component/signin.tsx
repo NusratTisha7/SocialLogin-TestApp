@@ -62,25 +62,24 @@ const SignIn = () => {
       if (response?.url) {
         // Redirect the popup to the Google sign-in page
         popup.location.href = response.url;
-
-        // Listen for when the popup closes
-        const popupInterval = setInterval(() => {
-          if (popup.closed) {
-            clearInterval(popupInterval);
-            // Optionally, refresh the page or do something else after the popup is closed
-            window.location.reload(); // This will reload the page to check if the user is logged in
-          }
-        }, 500);
       } else {
         console.error('Error fetching Google sign-in URL');
         popup.close();
       }
+
+      // Listen for when the popup closes
+      const popupInterval = setInterval(() => {
+        if (popup.closed) {
+          clearInterval(popupInterval);
+          // Optionally, refresh the page or do something else after the popup is closed
+          window.location.reload(); // This will reload the page to check if the user is logged in
+        }
+      }, 500);
     } catch (error) {
       console.error('Error during Google sign-in:', error);
       popup.close();
     }
   };
-
 
 
   return (
