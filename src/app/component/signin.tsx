@@ -104,7 +104,7 @@ const SignIn = () => {
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Apple</p>
       </div>
-      <p className="text-white">Counter: 9 </p>
+      <p className="text-white">Counter: 10 </p>
 
       <AppleSignin
         authOptions={{
