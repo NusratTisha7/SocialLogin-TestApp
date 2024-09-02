@@ -43,10 +43,13 @@ const SignIn = () => {
     const left = window.screen.width / 2 - width / 2;
     const top = window.screen.height / 2 - height / 2;
 
-    // Open a new window for Google sign-in
+    // Construct the full Google sign-in URL for NextAuth
+    const googleSignInUrl = `/api/auth/signin/google?callbackUrl=${encodeURIComponent(window.location.href)}`;
+
+    // Open the Google sign-in page in a new popup window
     const popup = window.open(
-      '/api/auth/signin/google',
-      'Google SignIn',
+      googleSignInUrl,
+      'GoogleSignIn',
       `width=${width},height=${height},top=${top},left=${left}`
     );
 
@@ -54,7 +57,16 @@ const SignIn = () => {
       alert('Popup blocked! Please allow popups for this website.');
       return;
     }
-  }
+
+    // Listen for when the popup closes
+    const popupInterval = setInterval(() => {
+      if (popup.closed) {
+        clearInterval(popupInterval);
+        // Optionally, refresh the page or do something else after the popup is closed
+        window.location.reload(); // This will reload the page to check if the user is logged in
+      }
+    }, 500);
+  };
 
 
   return (
