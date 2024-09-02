@@ -56,31 +56,33 @@ const SignIn = () => {
     }
 
     try {
-      // Use NextAuth's signIn function with redirect: false to get the URL
+      // Fetch the sign-in URL from NextAuth without redirection
       const response = await signIn('google', { redirect: false });
 
       if (response?.url) {
-        // Redirect the popup to the Google sign-in page
+        // Redirect the popup window to the Google sign-in page
         popup.location.href = response.url;
+
+        // Prevent main window from navigating away
+        popup.focus();
+
+        // Monitor the popup for closure
+        const popupInterval = setInterval(() => {
+          if (popup.closed) {
+            clearInterval(popupInterval);
+            // Refresh the page or perform an action after popup is closed
+            window.location.reload();
+          }
+        }, 500);
       } else {
         console.error('Error fetching Google sign-in URL');
         popup.close();
       }
-
-      // Listen for when the popup closes
-      const popupInterval = setInterval(() => {
-        if (popup.closed) {
-          clearInterval(popupInterval);
-          // Optionally, refresh the page or do something else after the popup is closed
-          window.location.reload(); // This will reload the page to check if the user is logged in
-        }
-      }, 500);
     } catch (error) {
       console.error('Error during Google sign-in:', error);
       popup.close();
     }
   };
-
 
   return (
     <div className="mt-3 grid grid-cols-2 gap-2">
