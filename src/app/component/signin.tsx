@@ -74,6 +74,7 @@ const SignIn = () => {
             } else {
             authWindow.location = response.url;
             }
+            });
         }}
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Google</p>
