@@ -37,45 +37,30 @@ const SignIn = () => {
     }
   };
 
-  const signInWithGooglePopup = () => {
+  const handleGoogleSignIn = () => {
     const width = 500;
     const height = 600;
     const left = window.screen.width / 2 - width / 2;
     const top = window.screen.height / 2 - height / 2;
-  
-    // Open a new window with the Google sign-in URL
+
+    // Open a new window for Google sign-in
     const popup = window.open(
-      '/api/auth/signin/google?callbackUrl=/',
-      'Google Login',
+      '/api/auth/signin/google',
+      'Google SignIn',
       `width=${width},height=${height},top=${top},left=${left}`
     );
-  
-    if (popup) {
-      // Check if the popup is closed
-      const popupInterval = setInterval(() => {
-        if (popup.closed) {
-          clearInterval(popupInterval);
-          // Refresh or perform any action after popup is closed
-          window.location.reload(); // This can be replaced with your custom logic
-        }
-      }, 500);
+
+    if (!popup) {
+      alert('Popup blocked! Please allow popups for this website.');
+      return;
     }
-  };
+
 
   return (
     <div className="mt-3 grid grid-cols-2 gap-2">
       <div
         className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6] p-3"
-        onClick={() => {
-          const authWindow = window.open("", "GoogleAuthWindow", "width=800,height=600");
-          signIn("google", { callbackUrl: "false" }).then((response) => {
-            if (response.error) {
-            authWindow.close();
-            } else {
-            authWindow.location = response.url;
-            }
-            });
-        }}
+        onClick={handleGoogleSignIn}
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Google</p>
       </div>
@@ -105,7 +90,7 @@ const SignIn = () => {
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Apple</p>
       </div>
-      <p className="text-white">Counter: 16 </p>
+      <p className="text-white">Counter: 17 </p>
 
       <AppleSignin
         authOptions={{
