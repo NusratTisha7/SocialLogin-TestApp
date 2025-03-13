@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 // @ts-ignore
 import AppleSignin from "react-apple-signin-auth";
 import { useEffect, useState } from "react";
+import useDeviceDetect from "./useDeviceDetect";
+
 
 interface UserInfo {
   userId: string;
@@ -17,7 +19,7 @@ interface UserInfo {
 const SignIn = () => {
 
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
- 
+  const { os } = useDeviceDetect();
   const handleSignIn = async (user: any) => {
     console.log("user",user)
     const idToken = user?.authorization?.id_token;
@@ -89,6 +91,7 @@ const SignIn = () => {
 
   return (
     <div className="mt-3 grid grid-cols-2 gap-2">
+      <p>{os}</p>
       <div
         className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6] p-3"
         onClick={handleGoogleSignIn}
