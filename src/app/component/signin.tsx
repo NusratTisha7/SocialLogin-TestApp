@@ -5,9 +5,7 @@ import jwt from "jsonwebtoken";
 // @ts-ignore
 import AppleSignin from "react-apple-signin-auth";
 import { useEffect, useState } from "react";
-import useDeviceDetect from "./useDeviceDetect";
-import useDevice from 'usedevice';
-
+const useMobileDetect = require("use-mobile-detect-hook").default;
 
 interface UserInfo {
   userId: string;
@@ -18,13 +16,12 @@ interface UserInfo {
 }
 
 const SignIn = () => {
-  
-  const os = useDevice();
+  const detectMobile = useMobileDetect();
 
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
- // const { os } = useDeviceDetect();
+  // const { os } = useDeviceDetect();
   const handleSignIn = async (user: any) => {
-    console.log("user",user)
+    console.log("user", user);
     const idToken = user?.authorization?.id_token;
     const decodedToken = jwt.decode(idToken, { complete: true });
     if (decodedToken) {
@@ -42,7 +39,6 @@ const SignIn = () => {
     }
   };
 
-
   const handleGoogleSignIn = async () => {
     const width = 500;
     const height = 600;
@@ -51,24 +47,28 @@ const SignIn = () => {
 
     // Open a blank popup window first
     const popup = window.open(
-      '',
-      'GoogleSignIn',
+      "",
+      "GoogleSignIn",
       `width=${width},height=${height},top=${top},left=${left}`
     );
 
     if (!popup) {
-      alert('Popup blocked! Please allow popups for this website.');
+      alert("Popup blocked! Please allow popups for this website.");
       return;
     }
 
     try {
       // Construct the OAuth URL manually
-      const baseUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
-      const clientId = encodeURIComponent('901205670049-lm68bhaqovc75s4s2fc5s18e846dqe8n.apps.googleusercontent.com');
-      const redirectUri = encodeURIComponent('https://firsttrip.vercel.app/api/auth/callback/google');
-      const scope = encodeURIComponent('openid profile email');
-      const responseType = 'code'; // Use 'code' for authorization code flow
-      const state = encodeURIComponent('YOUR_OPTIONAL_STATE');
+      const baseUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+      const clientId = encodeURIComponent(
+        "901205670049-lm68bhaqovc75s4s2fc5s18e846dqe8n.apps.googleusercontent.com"
+      );
+      const redirectUri = encodeURIComponent(
+        "https://firsttrip.vercel.app/api/auth/callback/google"
+      );
+      const scope = encodeURIComponent("openid profile email");
+      const responseType = "code"; // Use 'code' for authorization code flow
+      const state = encodeURIComponent("YOUR_OPTIONAL_STATE");
 
       const authUrl = `${baseUrl}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&state=${state}`;
 
@@ -87,28 +87,29 @@ const SignIn = () => {
         }
       }, 500);
     } catch (error) {
-      console.error('Error during Google sign-in:', error);
+      console.error("Error during Google sign-in:", error);
       popup.close();
     }
   };
 
   return (
     <div className="mt-3 grid grid-cols-2 gap-2">
-      <p>{os}</p>
+      is Mobile: {detectMobile.isMobile()} <br />
+      is Desktop: {detectMobile.isDesktop()} <br />
+      is Android: {detectMobile.isAndroid()} <br />
+      is iOS: {detectMobile.isIos()}
       <div
         className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6] p-3"
         onClick={handleGoogleSignIn}
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Google</p>
       </div>
-
       <div
         className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6]"
         onClick={() => signIn("facebook")}
       >
         <p className="ml-1 text-xs text-[#575757]">Sign in with Facebook</p>
       </div>
-
       <div
         className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6]"
         onClick={() =>
@@ -128,7 +129,6 @@ const SignIn = () => {
         <p className="ml-1 text-xs text-[#575757]">Sign in with Apple</p>
       </div>
       <p className="text-white">Counter: 21 </p>
-
       <AppleSignin
         authOptions={{
           clientId: "com.firsttrip.pre-b2c",
@@ -148,14 +148,12 @@ const SignIn = () => {
         render={(props: any) => (
           <button
             className=" cursor-pointer text-sm text-black bg-white px-5 py-2 rounded-lg"
-            
             {...props}
           >
             Ami Gumabo 😴
           </button>
         )}
       />
-
       {userInfo && (
         <>
           <p className="text-white">User ID: {userInfo.userId}</p>
