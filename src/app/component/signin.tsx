@@ -6,6 +6,8 @@ import jwt from "jsonwebtoken";
 import AppleSignin from "react-apple-signin-auth";
 import { useEffect, useState } from "react";
 
+import { useDeviceDetect } from "./detectOs";
+
 interface UserInfo {
   userId: string;
   email: string;
@@ -15,37 +17,38 @@ interface UserInfo {
 }
 
 const SignIn = () => {
-  const [os, setOs]: any = useState(null);
+  const { os } = useDeviceDetect();
+  const [oss, setOs]: any = useState(null);
   const [device, setDevice] = useState("");
   const [data, setData] = useState("");
   const [array, setArray]: any = useState([]);
 
-  useEffect(() => {
-    window.open(
-      `https://apps.apple.com/app/foodi-food-delivery/id1610910233`,
-      "_self"
-    );
-    if (navigator && navigator.userAgent) {
-      const userAgent = navigator.userAgent;
-      const Regex = /Android|iPhone|iOS|macOs|iPadOS|Windows|Phone/i;
-      const osMatch = Regex.exec(userAgent);
-      setData(userAgent);
-      setArray(osMatch);
-      if (osMatch) {
-        setOs(osMatch[0]);
-        osMatch[0] === "Android" || osMatch[0] === "iPhone"
-          ? setDevice("Mobile")
-          : setDevice("Desktop");
-      } else {
-        setOs("Unknown");
-        setDevice("Unknown");
-      }
-    } else {
-      console.warn(
-        "navigator.userAgent is not available. Mobile OS detection might not work."
-      );
-    }
-  }, []);
+  // useEffect(() => {
+  //   window.open(
+  //     `https://apps.apple.com/app/foodi-food-delivery/id1610910233`,
+  //     "_self"
+  //   );
+  //   if (navigator && navigator.userAgent) {
+  //     const userAgent = navigator.userAgent;
+  //     const Regex = /Android|iPhone|iOS|macOs|iPadOS|Windows|Phone/i;
+  //     const osMatch = Regex.exec(userAgent);
+  //     setData(userAgent);
+  //     setArray(osMatch);
+  //     if (osMatch) {
+  //       setOs(osMatch[0]);
+  //       osMatch[0] === "Android" || osMatch[0] === "iPhone"
+  //         ? setDevice("Mobile")
+  //         : setDevice("Desktop");
+  //     } else {
+  //       setOs("Unknown");
+  //       setDevice("Unknown");
+  //     }
+  //   } else {
+  //     console.warn(
+  //       "navigator.userAgent is not available. Mobile OS detection might not work."
+  //     );
+  //   }
+  // }, []);
 
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
@@ -81,8 +84,19 @@ const SignIn = () => {
     }
   };
 
+  useEffect(() => {
+    if (os) {
+      if (os === "Android") {
+        window.open(`${process.env.GOOGLE_STORE_URL}`, "_self");
+      } else if (os === "iPhone") {
+        window.open(`${process.env.APPLE_STORE_URL}`, "_self");
+      }
+    }
+  }, [os]);
+
   return (
     <div className="mt-3 grid grid-cols-2 gap-2">
+      <p>{os}</p>
       <div
         className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6] p-3"
         onClick={() => signIn("google")}
