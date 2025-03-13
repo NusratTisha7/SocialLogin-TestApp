@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import AppleSignin from "react-apple-signin-auth";
 import { useEffect, useState } from "react";
 import useDeviceDetect from "./useDeviceDetect";
+import useDevice from 'usedevice';
 
 
 interface UserInfo {
@@ -17,9 +18,10 @@ interface UserInfo {
 }
 
 const SignIn = () => {
+  const os = useDevice();
 
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-  const { os } = useDeviceDetect();
+ // const { os } = useDeviceDetect();
   const handleSignIn = async (user: any) => {
     console.log("user",user)
     const idToken = user?.authorization?.id_token;
