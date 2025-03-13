@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import AppleSignin from "react-apple-signin-auth";
 import { useEffect, useState } from "react";
 
-import { useDeviceDetect } from "./detectOs";
+import { useDeviceDetect } from "./useDeviceDetect";
 
 interface UserInfo {
   userId: string;
