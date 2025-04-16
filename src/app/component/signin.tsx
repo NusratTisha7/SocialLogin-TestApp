@@ -16,7 +16,7 @@ interface UserInfo {
 }
 
 const SignIn = () => {
-  const detectMobile = useMobileDetect();
+  //const detectMobile = useMobileDetect();
 
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   // const { os } = useDeviceDetect();
@@ -94,10 +94,6 @@ const SignIn = () => {
 
   return (
     <div className="mt-3 grid grid-cols-2 gap-2">
-      is Mobile: {detectMobile.isMobile()} <br />
-      is Desktop: {detectMobile.isDesktop()} <br />
-      is Android: {detectMobile.isAndroid()} <br />
-      is iOS: {detectMobile.isIos()}
       <div
         className="flex cursor-pointer items-center justify-center rounded-lg bg-[#F6F6F6] p-3"
         onClick={handleGoogleSignIn}
